@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Broadcast Messenger</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>📢 Broadcast Messenger</h2>
+    <div id="messages"></div>
+    <input type="text" id="username" placeholder="Your name" />
+    <input type="text" id="message" placeholder="Your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
