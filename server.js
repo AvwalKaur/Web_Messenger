@@ -1,23 +1,27 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const http = require("http").createServer(app);
-const io = require("socket.io")(http);
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const path = require('path');
 
-app.use(express.static("public")); // Serve files in /public folder
+// Serve static files from public/
+app.use(express.static(path.join(__dirname, 'public')));
 
-io.on("connection", (socket) => {
-  console.log("A user connected");
+// Socket.io logic
+io.on('connection', (socket) => {
+  console.log('A user connected');
 
-  socket.on("send message", (data) => {
-    io.emit("receive message", data); // Broadcast to all
+  socket.on('send message', (data) => {
+    io.emit('receive message', data);
   });
 
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
   });
 });
 
-const PORT = 3000;
+// Listen on the port Render provides (or fallback)
+const PORT = process.env.PORT || 3000;
 http.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
